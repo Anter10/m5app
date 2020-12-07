@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:m5app/modal/Market.dart';
 
 class MarketInfoCell extends StatefulWidget {
+  Market market;
+  MarketInfoCell(Market market){
+      this.market = market;
+  }
   @override
   MarketInfoCellState createState() {
     return MarketInfoCellState();
@@ -47,7 +52,7 @@ class MarketInfoCellState extends State<MarketInfoCell> {
                         text: TextSpan(
                           children: [
                             TextSpan(
-                                text: "黄金",
+                                text: "${this.widget.market.name}",
                                 style: TextStyle(
                                     fontSize: 16,
                                     color: Colors.black,
@@ -71,34 +76,26 @@ class MarketInfoCellState extends State<MarketInfoCell> {
             Table(
               children: [
                 TableRow(children: [
-                  Text("点差: 45",
+                
+                  Text("多: ${this.widget.market.ask}",
                       style: TextStyle(
                           fontSize: 18,
                           color: Colors.black87,
                           fontWeight: FontWeight.bold)),
-                  Text("多: 12344",
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.bold)),
-                  Text("高: 3333",
+                  Text("高: ${this.widget.market.askhigh}",
                       style: TextStyle(
                           fontSize: 18,
                           color: Colors.black87,
                           fontWeight: FontWeight.bold))
                 ]),
                 TableRow(children: [
-                  Text("涨跌: 56",
+                 
+                  Text("空: ${this.widget.market.bid}",
                       style: TextStyle(
                           fontSize: 18,
                           color: Colors.black87,
                           fontWeight: FontWeight.bold)),
-                  Text("空: 12344",
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.bold)),
-                  Text("低: 2222",
+                  Text("低: ${this.widget.market.asklow}",
                       style: TextStyle(
                           fontSize: 18,
                           color: Colors.black87,
