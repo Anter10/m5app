@@ -18,7 +18,6 @@ class ProfitView extends StatefulWidget {
 }
 
 
-
 class ProfitViewState extends State<ProfitView> {
   List<Market> markets = Cache.markets;
 
