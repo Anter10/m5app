@@ -19,12 +19,12 @@ class MarketInfoCell extends StatefulWidget {
 class MarketInfoCellState extends State<MarketInfoCell> {
   bool selected = false;
 
-  showCupertinoActionSheet() async {
+  showCupertinoActionSheet(Market market) async {
     var result = await showCupertinoModalPopup(
         context: context,
         builder: (context) {
           return CupertinoActionSheet(
-            title: Text('关于HK50的操作'),
+            title: Text('${market.name}: ${market.description}'),
             actions: <Widget>[
               CupertinoActionSheetAction(
                 child: Text('投资'),
@@ -80,7 +80,7 @@ class MarketInfoCellState extends State<MarketInfoCell> {
       onTapDown: (e) {
         setState(() {
           this.selected = !this.selected;
-          this.showCupertinoActionSheet();
+          this.showCupertinoActionSheet(this.widget.market);
         });
       },
       onTapUp: (e) {

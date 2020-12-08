@@ -25,6 +25,8 @@ class PersonWidget extends StatelessWidget {
         body: CustomScrollView(
         slivers: <Widget>[
         SliverAppBar(
+          backgroundColor: nagivator_bottom_color,
+
           flexibleSpace: FlexibleSpaceBar(
                 
           ),

@@ -9,28 +9,21 @@ final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 final SnackBar snackBar = const SnackBar(content: Text('Showing Snackbar'));
 
 /// This is the stateless widget that the main application instantiates.
-class MarketInfoViewWidget extends StatelessWidget {
-  MarketInfoViewWidget({Key key}) : super(key: key);
-
-  List<String> items = <String>["绑定微信", "绑定银行卡"];
-  deal_data(dynamic data) {
-    print("data ${jsonEncode(data)}");
-  }
+class AddAccountViewWidget extends StatelessWidget {
+  AddAccountViewWidget({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    HttpUtil.post("market_profit_and_volume_information/", {"symbol": "USDJPY"},
-        this.deal_data);
+   
     return Scaffold(
         body: CustomScrollView(
         slivers: <Widget>[
         SliverAppBar(
           backgroundColor: nagivator_bottom_color,
-
           flexibleSpace: FlexibleSpaceBar(
                
           ),
-          title: const Text('市场信息')
+          title: const Text('添加账号')
         ),
         
       ],
@@ -38,17 +31,17 @@ class MarketInfoViewWidget extends StatelessWidget {
   }
 }
 
-class MarketInfoViewState extends State<MarketInfoView> {
+class AddAccountViewState extends State<AddAccountView> {
   static const String _title = 'Flutter Code Sample';
 
   @override
   Widget build(BuildContext context) {
-    return MarketInfoViewWidget();
+    return AddAccountViewWidget();
   }
 }
 
 /// This Widget is the main application widget.
-class MarketInfoView extends StatefulWidget {
+class AddAccountView extends StatefulWidget {
   @override
-  MarketInfoViewState createState() => MarketInfoViewState();
+  AddAccountViewState createState() => AddAccountViewState();
 }
