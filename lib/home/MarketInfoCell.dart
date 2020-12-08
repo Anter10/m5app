@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:m5app/common/Utils.dart';
 import 'package:m5app/home/HistoryDetail.dart';
 import 'package:m5app/home/MarketInfoView.dart';
 import 'package:m5app/home/VentureView.dart';
@@ -27,7 +28,7 @@ class MarketInfoCellState extends State<MarketInfoCell> {
             title: Text('${market.name}: ${market.description}'),
             actions: <Widget>[
               CupertinoActionSheetAction(
-                child: Text('投资'),
+                child: Text('投资', style: TextStyle(color: nagivator_bottom_color,fontWeight: FontWeight.bold),),
                 onPressed: () {
                   Navigator.of(context).pop('');
                   Navigator.push(context, MaterialPageRoute<void>(
@@ -38,7 +39,7 @@ class MarketInfoCellState extends State<MarketInfoCell> {
                 },
               ),
               CupertinoActionSheetAction(
-                child: Text('详细情况'),
+                child: Text('详细情况',style: TextStyle(color: nagivator_bottom_color,fontWeight: FontWeight.bold),),
                 onPressed: () {
                   Navigator.of(context).pop('');
                   Navigator.push(context, MaterialPageRoute<void>(
@@ -50,7 +51,7 @@ class MarketInfoCellState extends State<MarketInfoCell> {
                 isDestructiveAction: false,
               ),
               CupertinoActionSheetAction(
-                child: Text('历史统计'),
+                child: Text('历史统计',style: TextStyle(color: nagivator_bottom_color,fontWeight: FontWeight.bold),),
                 onPressed: () {
                   Navigator.of(context).pop('');
                   Navigator.push(context, MaterialPageRoute<void>(
@@ -63,7 +64,7 @@ class MarketInfoCellState extends State<MarketInfoCell> {
               ),
             ],
             cancelButton: CupertinoActionSheetAction(
-              child: Text('取消'),
+              child: Text('取消',style: TextStyle(color: nagivator_bottom_color)),
               onPressed: () {
                 Navigator.of(context).pop('cancel');
               },
@@ -80,12 +81,12 @@ class MarketInfoCellState extends State<MarketInfoCell> {
       onTapDown: (e) {
         setState(() {
           this.selected = !this.selected;
-          this.showCupertinoActionSheet(this.widget.market);
         });
       },
       onTapUp: (e) {
         setState(() {
-          this.selected = false;
+          this.selected = !this.selected;
+          this.showCupertinoActionSheet(this.widget.market);
         });
       },
       onTapCancel: () {

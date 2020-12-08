@@ -7,6 +7,8 @@ import 'package:m5app/common/Cache.dart';
 import 'package:m5app/common/Utils.dart';
 import 'package:m5app/home/MarketInfoCell.dart';
 import 'package:m5app/modal/Market.dart';
+import 'package:m5app/modal/Venture.dart';
+import 'package:m5app/venture/ProfitViewCell.dart';
 
 
 
@@ -19,38 +21,36 @@ class ProfitView extends StatefulWidget {
 
 
 class ProfitViewState extends State<ProfitView> {
-  List<Market> markets = Cache.markets;
+  List<Venture> t_ventures = Cache.t_ventures;
 
-  EditViewState(){
+  ProfitViewState(){
      this.init_data();
   }
 
   init_data(){
-    HttpUtil.post("all_market/",{}, (dynamic data){
-       print("data = ${data["post_data"]}");
-       List<Market> t_markets = [];
-       for(dynamic _market in data["markets"]){
-           Market market = Market.fromJson(_market);
-           t_markets.add(market);
-           print("market name = ${market.name}");
+    HttpUtil.post("ventures/",{"tel_phone":tel_test_phone}, (dynamic data){
+       print("ventures = ${data}");
+       List<Venture> t_ventures = [];
+       for(dynamic _market in data["ventures"]){
+           Venture venture = Venture.fromJson(_market);
+           t_ventures.add(venture);
        }
-       Cache.markets = t_markets;
+       Cache.t_ventures = t_ventures;
        this.setState(() {
-            this.markets = t_markets;
+            this.t_ventures = t_ventures;
        });
     });
   }
 
   Widget build(BuildContext context) {
-    
-    var view = Scaffold(
-        body: ListView(
+   var view = Scaffold(
+        body: ListView.separated(
             padding: const EdgeInsets.all(0),
-            children: <Widget>[
-                Text("Hello profit view")
-            ],
-            )
-          );
+            itemCount: this.t_ventures.length,
+            separatorBuilder: (BuildContext context, int index) => const Divider(height: 2),
+            itemBuilder: (BuildContext context, int index) {
+              return  ProfitViewCell(this.t_ventures[index]);
+            }));
 
     return view;
   }
