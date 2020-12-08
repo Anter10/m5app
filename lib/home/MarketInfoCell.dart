@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:m5app/home/HistoryDetail.dart';
+import 'package:m5app/home/MarketInfoView.dart';
+import 'package:m5app/home/VentureView.dart';
 import 'package:m5app/modal/Market.dart';
 
 class MarketInfoCell extends StatefulWidget {
@@ -26,20 +29,35 @@ class MarketInfoCellState extends State<MarketInfoCell> {
               CupertinoActionSheetAction(
                 child: Text('投资'),
                 onPressed: () {
-                  Navigator.of(context).pop('delete');
+                  Navigator.of(context).pop('');
+                  Navigator.push(context, MaterialPageRoute<void>(
+                    builder: (BuildContext context) {
+                      return VentureView();
+                    },
+                  ));
                 },
               ),
               CupertinoActionSheetAction(
                 child: Text('详细情况'),
                 onPressed: () {
-                  Navigator.of(context).pop('not delete');
+                  Navigator.of(context).pop('');
+                  Navigator.push(context, MaterialPageRoute<void>(
+                    builder: (BuildContext context) {
+                      return MarketInfoView();
+                    },
+                  ));
                 },
                 isDestructiveAction: false,
               ),
               CupertinoActionSheetAction(
                 child: Text('历史统计'),
                 onPressed: () {
-                  Navigator.of(context).pop('not delete');
+                  Navigator.of(context).pop('');
+                  Navigator.push(context, MaterialPageRoute<void>(
+                    builder: (BuildContext context) {
+                      return HistoryDetailView();
+                    },
+                  ));
                 },
                 isDestructiveAction: false,
               ),

@@ -12,6 +12,7 @@
 import 'package:flutter/material.dart';
 import 'package:m5app/person/PersonView.dart';
 
+import 'EditView/EditView.dart';
 import 'home/HomeView.dart';
 
 const double bottom_icon_size = 24;
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 void openPage(BuildContext context) {
   Navigator.push(context, MaterialPageRoute(
     builder: (BuildContext context) {
@@ -53,6 +55,7 @@ void openPage(BuildContext context) {
     },
   ));
 }
+
 class MyStatefulWidget extends StatefulWidget {
   MyStatefulWidget({Key key}) : super(key: key);
 
@@ -64,20 +67,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static  List<Widget> _widgetOptions = <Widget>[
-     HomeView(),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
+  static List<Widget> _widgetOptions = <Widget>[
+    HomeView(),
     Text(
       'Index 2: School',
       style: optionStyle,
     ),
-    Text(
-      'Index 3: School',
-      style: optionStyle,
-    ),
+    EditView(),
   ];
 
   void _onItemTapped(int index) {
@@ -90,10 +86,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255,52,90,128),
-        title: const Text('MeView', style: TextStyle(color: Colors.white,fontSize: 26),),
+        backgroundColor: Color.fromARGB(255, 52, 90, 128),
+        title: const Text(
+          'MeView',
+          style: TextStyle(color: Colors.white, fontSize: 26),
+        ),
         actions: [
-          // IconButton(icon: Icon(Icons.video_call),iconSize: top_icon_size,color: Colors.black, onPressed: () { 
+          // IconButton(icon: Icon(Icons.video_call),iconSize: top_icon_size,color: Colors.black, onPressed: () {
           //      print("上传视频");
           //       Navigator.push(context, MaterialPageRoute<void>(
           //          builder: (BuildContext context) {
@@ -102,7 +101,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           //       ));
           //       // openPage(context);
           //  },),
-          //  IconButton(icon: Icon(Icons.search),iconSize: top_icon_size,color: Colors.black, onPressed: () { 
+          //  IconButton(icon: Icon(Icons.search),iconSize: top_icon_size,color: Colors.black, onPressed: () {
           //      print("搜索信息");
           //       Navigator.push(context, MaterialPageRoute<void>(
           //          builder: (BuildContext context) {
@@ -111,24 +110,28 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           //       ));
           //  },),
 
-           IconButton(icon: Icon(Icons.person),iconSize: top_icon_size,color: Color.fromARGB(255, 255, 255, 255), onPressed: () {
-               Navigator.push(context, MaterialPageRoute<void>(
-                   builder: (BuildContext context) {
-                      return PersonView();
-                   },
-                ));
-
-                
-           },),
+          IconButton(
+            icon: Icon(Icons.person),
+            iconSize: top_icon_size,
+            color: Color.fromARGB(255, 255, 255, 255),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute<void>(
+                builder: (BuildContext context) {
+                  return PersonView();
+                },
+              ));
+            },
+          ),
         ],
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color.fromARGB(255,52,90,128),
+        backgroundColor: Color.fromARGB(255, 52, 90, 128),
         type: BottomNavigationBarType.fixed,
-        selectedIconTheme:IconThemeData(color: Color.fromARGB(255, 240, 111, 32)),
+        selectedIconTheme:
+            IconThemeData(color: Color.fromARGB(255, 240, 111, 32)),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.apps, size: bottom_icon_size),
@@ -137,7 +140,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           BottomNavigationBarItem(
             icon: Icon(Icons.explore, size: bottom_icon_size),
             title: Text('收益'),
-            
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings, size: bottom_icon_size),
@@ -145,11 +147,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ),
         ],
         selectedItemColor: Color.fromARGB(255, 240, 111, 32),
-        unselectedItemColor:Colors.white,
+        unselectedItemColor: Colors.white,
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
       ),
     );
   }
 }
-

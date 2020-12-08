@@ -9,8 +9,8 @@ final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 final SnackBar snackBar = const SnackBar(content: Text('Showing Snackbar'));
 
 /// This is the stateless widget that the main application instantiates.
-class PersonWidget extends StatelessWidget {
-  PersonWidget({Key key}) : super(key: key);
+class VentureViewWidget extends StatelessWidget {
+  VentureViewWidget({Key key}) : super(key: key);
 
   List<String> items = <String>["绑定微信", "绑定银行卡"];
   deal_data(dynamic data) {
@@ -26,26 +26,27 @@ class PersonWidget extends StatelessWidget {
         slivers: <Widget>[
         SliverAppBar(
           flexibleSpace: FlexibleSpaceBar(
-                
+               
           ),
-          title: const Text('个人信息')
+          title: const Text('投资')
         ),
+        
       ],
     ));
   }
 }
 
-class PersonViewState extends State<PersonView> {
+class VentureViewState extends State<VentureView> {
   static const String _title = 'Flutter Code Sample';
 
   @override
   Widget build(BuildContext context) {
-    return PersonWidget();
+    return VentureViewWidget();
   }
 }
 
 /// This Widget is the main application widget.
-class PersonView extends StatefulWidget {
+class VentureView extends StatefulWidget {
   @override
-  PersonViewState createState() => PersonViewState();
+  VentureViewState createState() => VentureViewState();
 }
