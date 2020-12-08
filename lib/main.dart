@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: _title,
       home: MyStatefulWidget(),
     );
@@ -135,12 +136,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.explore, size: bottom_icon_size),
-            title: Text('投资'),
+            title: Text('收益'),
             
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.history, size: bottom_icon_size),
-            title: Text('历史'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings, size: bottom_icon_size),

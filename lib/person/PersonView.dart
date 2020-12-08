@@ -13,38 +13,26 @@ class PersonWidget extends StatelessWidget {
   PersonWidget({Key key}) : super(key: key);
 
   List<String> items = <String>["绑定微信", "绑定银行卡"];
-  deal_data(dynamic data){
+  deal_data(dynamic data) {
     print("data ${jsonEncode(data)}");
   }
+
   @override
   Widget build(BuildContext context) {
-    HttpUtil.post("market_profit_and_volume_information/",{"symbol":"USDJPY"},this.deal_data);
-    return Scaffold(
-        key: scaffoldKey,
-        appBar: AppBar(
-          backgroundColor: Color.fromARGB(255,52,90,128),
-          iconTheme: IconThemeData(color: Color.fromARGB(255,255,255,255)),
-          title: const Text('个人', style: TextStyle(color: Colors.white)),
+    HttpUtil.post("market_profit_and_volume_information/", {"symbol": "USDJPY"},
+        this.deal_data);
+    return Container(
+        child: CustomScrollView(
+      slivers: <Widget>[
+        SliverAppBar(
+          expandedHeight: 200, 
+          flexibleSpace: FlexibleSpaceBar(
+          ),
+          title: const Text('Sliver App Bar')
         ),
-        body: ListView(
-          children: <Widget>[
-            Container(
-              height: 50,
-              color: Colors.amber[600],
-              child: const Center(child: Text('Entry A')),
-            ),
-            Container(
-              height: 50,
-              color: Colors.amber[500],
-              child: const Center(child: Text('Entry B')),
-            ),
-            Container(
-              height: 50,
-              color: Colors.amber[100],
-              child: const Center(child: Text('Entry C')),
-            ),
-          ],
-        ));
+        
+      ],
+    ));
   }
 }
 
