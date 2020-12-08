@@ -11,12 +11,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:m5app/person/PersonView.dart';
+import 'package:m5app/venture/ProfitView.dart';
 
 import 'EditView/EditView.dart';
 import 'home/HomeView.dart';
 
 const double bottom_icon_size = 24;
 const double top_icon_size = 28;
+
+List<String> tab_titles = ["市场","收益","设置"];
 
 Future<void> main() async {
   // Fetch the available cameras before initializing the app.
@@ -69,10 +72,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
     HomeView(),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
+    ProfitView(),
     EditView(),
   ];
 
@@ -87,9 +87,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 52, 90, 128),
-        title: const Text(
-          'MeView',
-          style: TextStyle(color: Colors.white, fontSize: 26),
+        title: Text(
+          "${tab_titles[this._selectedIndex]}",
+          style: TextStyle(color: Colors.white, fontSize: 20),
         ),
         actions: [
           // IconButton(icon: Icon(Icons.video_call),iconSize: top_icon_size,color: Colors.black, onPressed: () {
