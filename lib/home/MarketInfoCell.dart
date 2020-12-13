@@ -1,3 +1,4 @@
+import 'package:date_format/date_format.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:m5app/common/Utils.dart';
@@ -39,12 +40,12 @@ class MarketInfoCellState extends State<MarketInfoCell> {
                 },
               ),
               CupertinoActionSheetAction(
-                child: Text('详细情况',style: TextStyle(color: nagivator_bottom_color,fontWeight: FontWeight.bold),),
+                child: Text('详情',style: TextStyle(color: nagivator_bottom_color,fontWeight: FontWeight.bold),),
                 onPressed: () {
                   Navigator.of(context).pop('');
                   Navigator.push(context, MaterialPageRoute<void>(
                     builder: (BuildContext context) {
-                      return MarketInfoView();
+                      return MarketInfoView(this.widget.market);
                     },
                   ));
                 },
@@ -77,6 +78,9 @@ class MarketInfoCellState extends State<MarketInfoCell> {
 
   @override
   Widget build(BuildContext context) {
+    DateTime date_time = DateTime.fromMillisecondsSinceEpoch(this.widget.market.time * 1000);
+    var format = formatDate(date_time, [mm,":",dd,":",HH,":",nn,":",ss]);
+ 
     GestureDetector Cell = GestureDetector(
       onTapDown: (e) {
         setState(() {
@@ -122,11 +126,11 @@ class MarketInfoCellState extends State<MarketInfoCell> {
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold)),
                               TextSpan(
-                                  text: " ",
+                                  text: "${format}",
                                   style: TextStyle(
                                       fontSize: 14, color: Colors.black87)),
                               TextSpan(
-                                  text: "22:00:00",
+                                  text: "",
                                   style: TextStyle(
                                       fontSize: 14, color: Colors.black87))
                             ],

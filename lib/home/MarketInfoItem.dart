@@ -1,55 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:m5app/EditView/AboutView.dart';
 
-class EditCellInterface {
+class MarketInfoItemInterface {
   Icon left_icon;
   String left_title;
+  String right_title;
   Function call;
 }
 
-class EditCell extends StatefulWidget {
-  EditCellInterface cell;
-  EditCell(EditCellInterface cell) {
+class MarketInfoItem extends StatefulWidget {
+  MarketInfoItemInterface cell;
+
+  MarketInfoItem(MarketInfoItemInterface cell) {
     this.cell = cell;
   }
   @override
-  EditCellState createState() {
-    return EditCellState();
+  MarketInfoItemState createState() {
+    return MarketInfoItemState();
   }
 }
 
-class EditCellState extends State<EditCell> {
+class MarketInfoItemState extends State<MarketInfoItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTapUp: (e) {
-          setState(() {
-            this.widget.cell.call();
-          });
-        },
         child: Container(
           padding: EdgeInsets.all(10),
           color: Colors.white,
-          height: 60,
+          height: 45,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Container(
                 child: Row(
                   children: <Widget>[
-                    this.widget.cell.left_icon,
-                    SizedBox(
-                      width: 15,
-                    ), //间距
-                    Text("${this.widget.cell.left_title}"), //标题
+                    Text("${this.widget.cell.left_title}",style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500,color: Colors.black)),
                   ],
                 ),
               ), //left
               Container(
                 child: Row(
                   children: <Widget>[
-                    Icon(Icons.keyboard_arrow_right,
-                        size: 32, color: Colors.grey),
+                     Text("${this.widget.cell.right_title}",style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 128, 128, 128))), 
                   ],
                 ),
               ), //right

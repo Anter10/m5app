@@ -39,18 +39,7 @@ class ProfitViewCellState extends State<ProfitViewCell> {
                   ));
                 },
               ),
-              CupertinoActionSheetAction(
-                child: Text('详细情况',style: TextStyle(color: nagivator_bottom_color,fontWeight: FontWeight.bold),),
-                onPressed: () {
-                  Navigator.of(context).pop('');
-                  Navigator.push(context, MaterialPageRoute<void>(
-                    builder: (BuildContext context) {
-                      return MarketInfoView();
-                    },
-                  ));
-                },
-                isDestructiveAction: false,
-              ),
+              
               CupertinoActionSheetAction(
                 child: Text('历史统计',style: TextStyle(color: nagivator_bottom_color,fontWeight: FontWeight.bold),),
                 onPressed: () {
@@ -81,7 +70,7 @@ class ProfitViewCellState extends State<ProfitViewCell> {
     GestureDetector Cell = GestureDetector(
       onTapDown: (e) {
         setState(() {
-         
+          this.selected = !this.selected;
         });
       },
       onTapUp: (e) {
@@ -97,12 +86,20 @@ class ProfitViewCellState extends State<ProfitViewCell> {
       },
       child: Container(
         decoration: BoxDecoration(
-          color:
-              this.selected ? Color.fromARGB(255, 242, 242, 242) : Colors.white,
+          color:this.selected ? Color.fromARGB(255, 242, 242, 242) : Colors.white,
           borderRadius: BorderRadius.circular(1),
         ),
         padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
         height: 120,
+        child: Table(
+           children: [
+               TableRow(
+                 children: <Widget>[
+                     Text("Hello ")
+                 ]
+               )
+           ],
+        ),
       ),
     );
     return Cell;
