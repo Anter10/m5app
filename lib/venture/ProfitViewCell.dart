@@ -6,12 +6,17 @@ import 'package:m5app/home/MarketInfoView.dart';
 import 'package:m5app/home/VentureView.dart';
 import 'package:m5app/modal/Market.dart';
 import 'package:m5app/modal/Venture.dart';
+import 'package:m5app/venture/ProfitDetailView.dart';
+import 'package:m5app/venture/VentureHistoryDetail.dart';
 
 class ProfitViewCell extends StatefulWidget {
   Venture venture;
-  ProfitViewCell(Venture venture) {
+  Market market;
+  ProfitViewCell(Venture venture, Market market) {
     this.venture = venture;
+    this.market = market;
   }
+
   @override
   ProfitViewCellState createState() {
     return ProfitViewCellState();
@@ -21,32 +26,33 @@ class ProfitViewCell extends StatefulWidget {
 class ProfitViewCellState extends State<ProfitViewCell> {
   bool selected = false;
 
-  showCupertinoActionSheet(Venture venture) async {
+
+  showCupertinoActionSheet(Venture venture, Market market) async {
     var result = await showCupertinoModalPopup(
         context: context,
         builder: (context) {
           return CupertinoActionSheet(
-            title: Text('${venture.id}: ${venture.id}'),
+            title: Text('${market.name}'),
             actions: <Widget>[
               CupertinoActionSheetAction(
-                child: Text('投资', style: TextStyle(color: nagivator_bottom_color,fontWeight: FontWeight.bold),),
+                child: Text('投资历史', style: TextStyle(color: nagivator_bottom_color,fontWeight: FontWeight.bold),),
                 onPressed: () {
                   Navigator.of(context).pop('');
                   Navigator.push(context, MaterialPageRoute<void>(
                     builder: (BuildContext context) {
-                      return VentureView();
+                      return VentureHistoryDetail(this.widget.venture);
                     },
                   ));
                 },
               ),
               
               CupertinoActionSheetAction(
-                child: Text('历史统计',style: TextStyle(color: nagivator_bottom_color,fontWeight: FontWeight.bold),),
+                child: Text('收益详情',style: TextStyle(color: nagivator_bottom_color,fontWeight: FontWeight.bold),),
                 onPressed: () {
                   Navigator.of(context).pop('');
                   Navigator.push(context, MaterialPageRoute<void>(
                     builder: (BuildContext context) {
-                      return HistoryDetailView();
+                      return ProfitDetailView(this.widget.venture);
                     },
                   ));
                 },
@@ -76,7 +82,7 @@ class ProfitViewCellState extends State<ProfitViewCell> {
       onTapUp: (e) {
         setState(() {
            this.selected = !this.selected;
-           this.showCupertinoActionSheet(this.widget.venture);
+           this.showCupertinoActionSheet(this.widget.venture, this.widget.market);
         });
       },
       onTapCancel: () {

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:m5app/common/Utils.dart';
+import 'package:m5app/home/MarketInfoCell.dart';
 import 'package:m5app/modal/Market.dart';
 import 'package:search_app_bar/filter.dart';
 import 'package:search_app_bar/search_app_bar.dart';
@@ -51,7 +52,8 @@ class MarketInfoViewState extends State<MarketInfoView> {
     item8_interface.left_title = "库存费类型";
     item8_interface.right_title = "${this.widget.market.swap_mode}";
     
-
+    MarketInfoCell cell = MarketInfoCell(this.widget.market);
+    cell.type = 2;
 
     return Scaffold(
         appBar: AppBar(
@@ -62,6 +64,11 @@ class MarketInfoViewState extends State<MarketInfoView> {
             )),
         body: ListView(
             children: [
+              Container(
+                height: 130, 
+                child: cell,
+              ),
+              Divider(height: 1,),
               MarketInfoItem(item1_interface),
               Divider(height: 1,),
               MarketInfoItem(item2_interface),

@@ -9,9 +9,11 @@ import 'package:m5app/modal/Market.dart';
 
 class MarketInfoCell extends StatefulWidget {
   Market market;
+  int type = 1;
   MarketInfoCell(Market market) {
     this.market = market;
   }
+
   @override
   MarketInfoCellState createState() {
     return MarketInfoCellState();
@@ -29,7 +31,12 @@ class MarketInfoCellState extends State<MarketInfoCell> {
             title: Text('${market.name}: ${market.description}'),
             actions: <Widget>[
               CupertinoActionSheetAction(
-                child: Text('投资', style: TextStyle(color: nagivator_bottom_color,fontWeight: FontWeight.bold),),
+                child: Text(
+                  '投资',
+                  style: TextStyle(
+                      color: nagivator_bottom_color,
+                      fontWeight: FontWeight.bold),
+                ),
                 onPressed: () {
                   Navigator.of(context).pop('');
                   Navigator.push(context, MaterialPageRoute<void>(
@@ -40,7 +47,12 @@ class MarketInfoCellState extends State<MarketInfoCell> {
                 },
               ),
               CupertinoActionSheetAction(
-                child: Text('详情',style: TextStyle(color: nagivator_bottom_color,fontWeight: FontWeight.bold),),
+                child: Text(
+                  '详情',
+                  style: TextStyle(
+                      color: nagivator_bottom_color,
+                      fontWeight: FontWeight.bold),
+                ),
                 onPressed: () {
                   Navigator.of(context).pop('');
                   Navigator.push(context, MaterialPageRoute<void>(
@@ -51,21 +63,27 @@ class MarketInfoCellState extends State<MarketInfoCell> {
                 },
                 isDestructiveAction: false,
               ),
-              CupertinoActionSheetAction(
-                child: Text('历史统计',style: TextStyle(color: nagivator_bottom_color,fontWeight: FontWeight.bold),),
-                onPressed: () {
-                  Navigator.of(context).pop('');
-                  Navigator.push(context, MaterialPageRoute<void>(
-                    builder: (BuildContext context) {
-                      return HistoryDetailView();
-                    },
-                  ));
-                },
-                isDestructiveAction: false,
-              ),
+              // CupertinoActionSheetAction(
+              //   child: Text(
+              //     '历史统计',
+              //     style: TextStyle(
+              //         color: nagivator_bottom_color,
+              //         fontWeight: FontWeight.bold),
+              //   ),
+              //   onPressed: () {
+              //     Navigator.of(context).pop('');
+              //     Navigator.push(context, MaterialPageRoute<void>(
+              //       builder: (BuildContext context) {
+              //         return HistoryDetailView();
+              //       },
+              //     ));
+              //   },
+              //   isDestructiveAction: false,
+              // ),
             ],
             cancelButton: CupertinoActionSheetAction(
-              child: Text('取消',style: TextStyle(color: nagivator_bottom_color)),
+              child:
+                  Text('取消', style: TextStyle(color: nagivator_bottom_color)),
               onPressed: () {
                 Navigator.of(context).pop('cancel');
               },
@@ -78,24 +96,32 @@ class MarketInfoCellState extends State<MarketInfoCell> {
 
   @override
   Widget build(BuildContext context) {
-    DateTime date_time = DateTime.fromMillisecondsSinceEpoch(this.widget.market.time * 1000);
-    var format = formatDate(date_time, [mm,":",dd,":",HH,":",nn,":",ss]);
- 
+    DateTime date_time =
+        DateTime.fromMillisecondsSinceEpoch(this.widget.market.time * 1000);
+    var format =
+        formatDate(date_time, [mm, ":", dd, ":", HH, ":", nn, ":", ss]);
+
     GestureDetector Cell = GestureDetector(
       onTapDown: (e) {
         setState(() {
-          this.selected = !this.selected;
+          if (this.widget.type == 1) {
+            this.selected = !this.selected;
+          }
         });
       },
       onTapUp: (e) {
         setState(() {
-          this.selected = !this.selected;
-          this.showCupertinoActionSheet(this.widget.market);
+          if (this.widget.type == 1) {
+            this.selected = !this.selected;
+            this.showCupertinoActionSheet(this.widget.market);
+          }
         });
       },
       onTapCancel: () {
         setState(() {
-          this.selected = false;
+          if (this.widget.type == 1) {
+            this.selected = false;
+          }
         });
       },
       child: Container(

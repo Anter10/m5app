@@ -12,15 +12,8 @@ final SnackBar snackBar = const SnackBar(content: Text('Showing Snackbar'));
 class HistoryDetailViewWidget extends StatelessWidget {
   HistoryDetailViewWidget({Key key}) : super(key: key);
 
-  List<String> items = <String>["绑定微信", "绑定银行卡"];
-  deal_data(dynamic data) {
-    print("data ${jsonEncode(data)}");
-  }
-
   @override
   Widget build(BuildContext context) {
-    HttpUtil.post("market_profit_and_volume_information/", {"symbol": "USDJPY"},
-        this.deal_data);
     return Scaffold(
         body: CustomScrollView(
         slivers: <Widget>[

@@ -22,6 +22,7 @@ class ProfitView extends StatefulWidget {
 
 class ProfitViewState extends State<ProfitView> {
   List<Venture> t_ventures = Cache.t_ventures;
+       List<Market> venture_markets = Cache.venture_markets;
 
   ProfitViewState(){
      this.init_data();
@@ -31,13 +32,24 @@ class ProfitViewState extends State<ProfitView> {
     HttpUtil.post("ventures/",{"tel_phone":tel_test_phone}, (dynamic data){
        print("ventures = ${data}");
        List<Venture> t_ventures = [];
-       for(dynamic _market in data["ventures"]){
-           Venture venture = Venture.fromJson(_market);
+       List<Market> venture_markets = [];
+
+       for(dynamic _venture in data["ventures"]){
+           Venture venture = Venture.fromJson(_venture);
            t_ventures.add(venture);
        }
+
+       for(dynamic _market in data["markets"]){
+           Market market = Market.fromJson(_market);
+           venture_markets.add(market);
+       }
+
+       Cache.venture_markets = venture_markets;
        Cache.t_ventures = t_ventures;
+
        this.setState(() {
             this.t_ventures = t_ventures;
+            this.venture_markets = venture_markets;
        });
     });
   }
@@ -49,7 +61,7 @@ class ProfitViewState extends State<ProfitView> {
             itemCount: this.t_ventures.length,
             separatorBuilder: (BuildContext context, int index) => const Divider(height: 2),
             itemBuilder: (BuildContext context, int index) {
-              return  ProfitViewCell(this.t_ventures[index]);
+              return  ProfitViewCell(this.t_ventures[index],this.venture_markets[index]);
             }));
 
     return view;
