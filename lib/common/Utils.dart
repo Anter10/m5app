@@ -12,9 +12,6 @@ String tel_test_phone = "15810757355";
 
 EventBus event_bus = new EventBus();
 
-
- 
-
 /// Flutter code sample for Form
 
 // This example shows a [Form] with one [TextFormField] to enter an email
@@ -36,7 +33,7 @@ void ShowToast(String msg) {
 
 class HttpUtil {
   // static String url = "http://192.168.101.25:8081/";
-  static String url = "http://192.168.100.128:8081/";
+  static String url = "http://192.168.1.117:8081/";
   // static String url = "http://192.168.100.155:8081/";
   static bool posting = false;
 
@@ -52,7 +49,7 @@ class HttpUtil {
       var jsonResponse = convert.jsonDecode(utf8.decode(response.bodyBytes));
       if (jsonResponse["code"] != 0) {
         ShowToast(jsonResponse["msg"]);
-      }else{
+      } else {
         callback(jsonResponse);
       }
     } else {

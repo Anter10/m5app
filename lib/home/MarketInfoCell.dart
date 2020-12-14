@@ -41,7 +41,7 @@ class MarketInfoCellState extends State<MarketInfoCell> {
                   Navigator.of(context).pop('');
                   Navigator.push(context, MaterialPageRoute<void>(
                     builder: (BuildContext context) {
-                      return VentureView();
+                      return VentureView(this.widget.market);
                     },
                   ));
                 },
