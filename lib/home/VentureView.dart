@@ -160,7 +160,7 @@ class VentureViewState extends State<VentureView> {
         Padding(
           padding: const EdgeInsets.only(left: 10.0, top: 20.0),
           child: Text(
-            "请点击后,上下滑动选择你想要投资金额",
+            "请点箭头后,通过上下滑动选择你想要投资金额",
             style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
           ),
         ),
@@ -198,6 +198,11 @@ class VentureViewState extends State<VentureView> {
 
                 HttpUtil.post("venture/", login_data, (dynamic data) {
                   print("登陆数据回调 = ${data}");
+                  Map<String, dynamic> result = data["result"];
+                  if (result != null) {
+                    Cache.user.balance = result["balance"];
+                    this.setState(() {});
+                  }
                 });
               },
               child: Text('确定投资'),

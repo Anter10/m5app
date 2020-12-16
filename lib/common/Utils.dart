@@ -33,7 +33,7 @@ void ShowToast(String msg) {
 
 class HttpUtil {
   // static String url = "http://192.168.101.25:8081/";
-  static String url = "http://192.168.1.117:8081/";
+  static String url = "http://192.168.100.128:8081/";
   // static String url = "http://192.168.100.155:8081/";
   static bool posting = false;
 

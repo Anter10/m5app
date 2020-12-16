@@ -26,7 +26,6 @@ class ProfitViewCell extends StatefulWidget {
 class ProfitViewCellState extends State<ProfitViewCell> {
   bool selected = false;
 
-
   showCupertinoActionSheet(Venture venture, Market market) async {
     var result = await showCupertinoModalPopup(
         context: context,
@@ -35,7 +34,12 @@ class ProfitViewCellState extends State<ProfitViewCell> {
             title: Text('${market.name}'),
             actions: <Widget>[
               CupertinoActionSheetAction(
-                child: Text('投资历史', style: TextStyle(color: nagivator_bottom_color,fontWeight: FontWeight.bold),),
+                child: Text(
+                  '投资历史',
+                  style: TextStyle(
+                      color: nagivator_bottom_color,
+                      fontWeight: FontWeight.bold),
+                ),
                 onPressed: () {
                   Navigator.of(context).pop('');
                   Navigator.push(context, MaterialPageRoute<void>(
@@ -45,9 +49,13 @@ class ProfitViewCellState extends State<ProfitViewCell> {
                   ));
                 },
               ),
-              
               CupertinoActionSheetAction(
-                child: Text('收益详情',style: TextStyle(color: nagivator_bottom_color,fontWeight: FontWeight.bold),),
+                child: Text(
+                  '收益详情',
+                  style: TextStyle(
+                      color: nagivator_bottom_color,
+                      fontWeight: FontWeight.bold),
+                ),
                 onPressed: () {
                   Navigator.of(context).pop('');
                   Navigator.push(context, MaterialPageRoute<void>(
@@ -60,7 +68,8 @@ class ProfitViewCellState extends State<ProfitViewCell> {
               ),
             ],
             cancelButton: CupertinoActionSheetAction(
-              child: Text('取消',style: TextStyle(color: nagivator_bottom_color)),
+              child:
+                  Text('取消', style: TextStyle(color: nagivator_bottom_color)),
               onPressed: () {
                 Navigator.of(context).pop('cancel');
               },
@@ -81,8 +90,9 @@ class ProfitViewCellState extends State<ProfitViewCell> {
       },
       onTapUp: (e) {
         setState(() {
-           this.selected = !this.selected;
-           this.showCupertinoActionSheet(this.widget.venture, this.widget.market);
+          this.selected = !this.selected;
+          this.showCupertinoActionSheet(
+              this.widget.venture, this.widget.market);
         });
       },
       onTapCancel: () {
@@ -92,19 +102,41 @@ class ProfitViewCellState extends State<ProfitViewCell> {
       },
       child: Container(
         decoration: BoxDecoration(
-          color:this.selected ? Color.fromARGB(255, 242, 242, 242) : Colors.white,
+          color:
+              this.selected ? Color.fromARGB(255, 242, 242, 242) : Colors.white,
           borderRadius: BorderRadius.circular(1),
         ),
         padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
         height: 120,
-        child: Table(
-           children: [
-               TableRow(
-                 children: <Widget>[
-                     Text("Hello ")
-                 ]
-               )
-           ],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("${this.widget.market.name}", style: TextStyle(fontSize: 18)),
+            Container(
+                margin: EdgeInsets.only(top: 15),
+                child: Row(
+                  children: [
+                    Text("资金: ${this.widget.venture.venture_money}"),
+                    Container(width: 10),
+                    Text("持仓: ${this.widget.venture.trading_money}"),
+                    Container(width: 10),
+                    Text(
+                        "比例: ${(this.widget.venture.trading_money / this.widget.venture.venture_money * 100).toStringAsFixed(2)}%"),
+                  ],
+                )),
+            Container(
+                margin: EdgeInsets.only(top: 15),
+                child: Row(
+                  children: [
+                    Text("手数: ${this.widget.venture.venture_money}"),
+                    Container(width: 10),
+                    Text("收益: ${this.widget.venture.trading_money}"),
+                    Container(width: 10),
+                    Text(
+                        "收益比: ${(this.widget.venture.trading_money / this.widget.venture.venture_money * 100).toStringAsFixed(2)}%"),
+                  ],
+                ))
+          ],
         ),
       ),
     );
