@@ -19,7 +19,7 @@ import 'home/HomeView.dart';
 const double bottom_icon_size = 24;
 const double top_icon_size = 28;
 
-List<String> tab_titles = ["市场","收益","设置"];
+List<String> tab_titles = ["市场", "收益", "设置"];
 
 Future<void> main() async {
   // Fetch the available cameras before initializing the app.
@@ -84,6 +84,48 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
+    IconButton action_button;
+
+    if (_selectedIndex == 0) {
+      action_button = IconButton(
+        icon: Icon(Icons.edit),
+        iconSize: top_icon_size,
+        color: Color.fromARGB(255, 255, 255, 255),
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute<void>(
+            builder: (BuildContext context) {
+              return PersonView();
+            },
+          ));
+        },
+      );
+    } else if (_selectedIndex == 1) {
+      action_button = IconButton(
+        icon: Icon(Icons.history),
+        iconSize: top_icon_size,
+        color: Color.fromARGB(255, 255, 255, 255),
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute<void>(
+            builder: (BuildContext context) {
+              return PersonView();
+            },
+          ));
+        },
+      );
+    } else if (_selectedIndex == 2) {
+      action_button = IconButton(
+        icon: Icon(Icons.person),
+        iconSize: top_icon_size,
+        color: Color.fromARGB(255, 255, 255, 255),
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute<void>(
+            builder: (BuildContext context) {
+              return PersonView();
+            },
+          ));
+        },
+      );
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 52, 90, 128),
@@ -91,38 +133,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           "${tab_titles[this._selectedIndex]}",
           style: TextStyle(color: Colors.white, fontSize: 20),
         ),
-        actions: [
-          // IconButton(icon: Icon(Icons.video_call),iconSize: top_icon_size,color: Colors.black, onPressed: () {
-          //      print("上传视频");
-          //       Navigator.push(context, MaterialPageRoute<void>(
-          //          builder: (BuildContext context) {
-          //             return VideoCallView();
-          //          },
-          //       ));
-          //       // openPage(context);
-          //  },),
-          //  IconButton(icon: Icon(Icons.search),iconSize: top_icon_size,color: Colors.black, onPressed: () {
-          //      print("搜索信息");
-          //       Navigator.push(context, MaterialPageRoute<void>(
-          //          builder: (BuildContext context) {
-          //             return SearchView();
-          //          },
-          //       ));
-          //  },),
-
-          IconButton(
-            icon: Icon(Icons.person),
-            iconSize: top_icon_size,
-            color: Color.fromARGB(255, 255, 255, 255),
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute<void>(
-                builder: (BuildContext context) {
-                  return PersonView();
-                },
-              ));
-            },
-          ),
-        ],
+        actions: [action_button],
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),

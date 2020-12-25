@@ -28,8 +28,8 @@ class EditViewState extends State<EditView> {
     event_bus.on<String>().listen((event) {
       print("data ${event}");
       setState(() {
-          this.statue1 = 2;
-          print("data1 ${event}");
+        this.statue1 = 2;
+        print("data1 ${event}");
       });
     });
   }
